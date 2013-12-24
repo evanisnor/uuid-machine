@@ -1,0 +1,43 @@
+<div class="controls">
+	<div>
+		<input type="number" value="{{amount}}" on-change="amount" />
+	</div>
+
+	<div class="options unselectable">
+		<ul>
+		{{#formatting:i}}
+			<li on-click="format:{{i}}">
+				<span>&#123;</span>
+				<input id="option-{{i}}" type="checkbox" value="checked" checked="{{selected}}" on-click="format:{{i}}" />
+				<label for="option-{{i}}">{{enum.label}}</span>
+				<span>&#125;</span>
+			</li>
+		{{/formatting}}
+		</ul>
+	</div>
+
+	<div class="generate button unselectable" on-click="generate">
+		<span class="icon"></span>
+		<span class="label">generate</span>
+	</div>
+</div>
+
+{{#hasUuids}}
+<div class="output">
+	<ul>
+	{{#uuidlist}}
+		<li>
+			<div class="uuid">{{.}}</div>
+		</li>
+	{{/uuidlist}}
+	</ul>
+</div>
+
+<div class="footer">
+	<div class="clear button unselectable" on-click="clear">
+		<span class="icon"></span>
+		<span class="label">clear</span>
+	</div>
+</div>
+{{/hasUuids}}
+
