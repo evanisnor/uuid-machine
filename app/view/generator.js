@@ -1,4 +1,12 @@
-define(['lodash', 'ractive', 'controller/machine', 'enum/uuidformat', 'text!view/generator/generator.html', 'css!view/generator/generator.css'],
+define([
+	'lodash',
+	'ractive',
+	'controller/machine',
+	'enum/uuidformat',
+	'text!view/generator/generator.html',
+	'css!view/generator/generator.css',
+	'css!view/spinner.css'],
+
 	function(_, Ractive, Machine, UuidFormat, template) {
 
 		var view = function(element) {
@@ -12,20 +20,42 @@ define(['lodash', 'ractive', 'controller/machine', 'enum/uuidformat', 'text!view
 			];
 
 			this.machine = new Machine([UuidFormat.Hyphens, UuidFormat.Braces]);
+			this.machine.generate(this.amount);
 
-			this.generate();
 			this.render();
 		};
 
-		view.prototype.generate = function() {
-			this.machine.generate(this.amount);
+		view.prototype.generate = function(done) {
+			var self = this;
+			setTimeout(function() {
+				self.machine.generate(self.amount);
+				if (done) {
+					done();
+				}
+			}, 1);
 		};
 
-		view.prototype.format = function() {
-			var selectedFormat = _.pluck(_.filter(this.formatting, function(option) {
-				return option.selected;
-			}), 'enum');
-			this.machine.format(selectedFormat);
+		view.prototype.format = function(done) {
+			var self = this;
+			setTimeout(function() {
+				var selectedFormat = _.pluck(_.filter(self.formatting, function(option) {
+					return option.selected;
+				}), 'enum');
+				self.machine.format(selectedFormat);
+				if (done) {
+					done();
+				}
+			}, 1);
+		};
+
+		view.prototype.clear = function(done) {
+			var self = this;
+			setTimeout(function() {
+				self.machine.clear();
+				if (done) {
+					done();
+				}
+			}, 1);
 		};
 
 		view.prototype.render = function() {
@@ -38,33 +68,48 @@ define(['lodash', 'ractive', 'controller/machine', 'enum/uuidformat', 'text!view
 					amount: self.amount,
 					formatting: self.formatting,
 					uuidlist: self.machine.formatted,
-					generate: self.machine.generate,
-					format: self.format,
-					hasUuids : true
+					hasUuids: true,
+					hasManyUuids: false,
+					isWorking: false
 				}
 			});
 
-			self.ractive.on('amount', function() { self.amount = this.data.amount; });
+			self.ractive.on('amount-update', function() { self.amount = this.data.amount; });
+
 			self.ractive.on('generate', function() {
-				self.generate();
-				self.ractive.set('uuidlist', self.machine.formatted);
-				self.ractive.set('hasUuids', self.machine.formatted.length > 0);
+				self.ractive.set('isWorking', true);
+				self.generate(function() {
+					self.ractive.set('uuidlist', self.machine.formatted);
+					self.ractive.set('hasUuids', self.machine.formatted.length > 0);
+					self.ractive.set('hasManyUuids', self.machine.formatted.length >= 50);
+					self.ractive.set('isWorking', false);
+				});
 			});
+
 			self.ractive.on('format', function(event, id) {
+				self.ractive.set('isWorking', true);
 				if (navigator.userAgent.indexOf('Firefox/') != -1 && event.node.tagName === 'INPUT') {
 					// Ractive.js/Firefox bug: Checkbox selections don't get updated automatically
 					// like they do in Webkit browsers, so we have to set them maually. Haven't tested IE yet.
 					self.formatting[id].selected = !self.formatting[id].selected;
 				}
 				event.original.stopPropagation();
-				self.format();
-				self.ractive.set('uuidlist', self.machine.formatted);
-				self.ractive.set('hasUuids', self.machine.formatted.length > 0);
+				self.format(function() {
+					self.ractive.set('uuidlist', self.machine.formatted);
+					self.ractive.set('hasUuids', self.machine.formatted.length > 0);
+					self.ractive.set('hasManyUuids', self.machine.formatted.length >= 50);
+					self.ractive.set('isWorking', false);
+				});
 			});
+
 			self.ractive.on('clear', function() {
-				self.machine.clear();
-				self.ractive.set('uuidlist', self.machine.formatted);
-				self.ractive.set('hasUuids', self.machine.formatted.length > 0);
+				self.ractive.set('isWorking', true);
+				self.clear(function() {
+					self.ractive.set('uuidlist', self.machine.formatted);
+					self.ractive.set('hasUuids', self.machine.formatted.length > 0);
+					self.ractive.set('hasManyUuids', self.machine.formatted.length >= 50);
+					self.ractive.set('isWorking', false);
+				});
 			});
 		};
 

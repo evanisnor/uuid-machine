@@ -1,6 +1,6 @@
 <div class="controls">
 	<div>
-		<input type="number" value="{{amount}}" on-change="amount" />
+		<input type="number" value="{{amount}}" min="1" max="50000" on-change="amount-update" />
 	</div>
 
 	<div class="options unselectable">
@@ -22,6 +22,15 @@
 	</div>
 </div>
 
+{{#hasManyUuids}}
+<div class="footer">
+	<div class="clear button unselectable" on-click="clear">
+		<span class="icon"></span>
+		<span class="label">clear</span>
+	</div>
+</div>
+{{/hasManyUuids}}
+
 {{#hasUuids}}
 <div class="output">
 	<ul>
@@ -41,3 +50,16 @@
 </div>
 {{/hasUuids}}
 
+{{#isWorking}}
+<div class="modal-blinder">
+	<div class="modal-wrapper">
+		<div class="spinner">
+		  <div class="rect1"></div>
+		  <div class="rect2"></div>
+		  <div class="rect3"></div>
+		  <div class="rect4"></div>
+		  <div class="rect5"></div>
+		</div>
+	</div>
+</div>
+{{/isWorking}}

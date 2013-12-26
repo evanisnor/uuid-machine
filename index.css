@@ -9,7 +9,7 @@
 }
 
 body {
-	background-color: #9bbf81;
+	background-color: #a6cbf0;
 	font-family: arial,helvetica;
 	margin: 0;
 	padding: 0;
@@ -57,7 +57,7 @@ a:hover {
 .content {
 	text-align: center;
 	background-color: #ffffff;
-	border: 0.5em solid #73a152;
+	border: 0.5em solid #006596;
 	-moz-border-radius: 0.5em;
 	border-radius: 0.5em;
 	margin: 0;
@@ -86,11 +86,29 @@ a:hover {
 	padding-left: 1em;
 	padding-right: 1em;
 	border: 1px solid #000000;
-	background-color: #10778f;
+	background-color: #004b67;
 }
 
 .button:active {
-	background-color: #1aa4d1;
+	background-color: #a6cbf0;
+}
+
+.modal-blinder {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 100;
+
+	opacity: 0.5;
+	background-color: #000000;
+}
+
+.modal-blinder .modal-wrapper {
+	position: absolute;
+	top: 50%;
+	left: 50%;
 }
 
 .unselectable {
