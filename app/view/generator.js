@@ -4,10 +4,13 @@ define([
 	'controller/machine',
 	'enum/uuidformat',
 	'text!view/generator/generator.html',
+	'text!view/generator/footer.html',
+	'text!view/generator/formatOption.html',
+	'text!view/spinner.html',
 	'css!view/generator/generator.css',
 	'css!view/spinner.css'],
 
-	function(_, Ractive, Machine, UuidFormat, template) {
+	function(_, Ractive, Machine, UuidFormat, generatorTemplate, footerTemplate, formatOptionTemplate, spinnerTemplate) {
 
 		var view = function(element) {
 			this.element = element;
@@ -63,8 +66,13 @@ define([
 
 			self.ractive = new Ractive({
 				el: self.element,
-				template: template,
-				data : {
+				template: generatorTemplate,
+				partials: {
+					footer: footerTemplate,
+					spinner: spinnerTemplate,
+					formatOption: formatOptionTemplate
+				},
+				data: {
 					amount: self.amount,
 					formatting: self.formatting,
 					uuidlist: self.machine.formatted,

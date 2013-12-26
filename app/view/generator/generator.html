@@ -6,12 +6,7 @@
 	<div class="options unselectable">
 		<ul>
 		{{#formatting:i}}
-			<li on-click="format:{{i}}">
-				<span>&#123;</span>
-				<input id="option-{{i}}" type="checkbox" value="checked" checked="{{selected}}" on-click="format:{{i}}" />
-				<label for="option-{{i}}">{{enum.label}}</span>
-				<span>&#125;</span>
-			</li>
+			{{>formatOption}}
 		{{/formatting}}
 		</ul>
 	</div>
@@ -23,43 +18,23 @@
 </div>
 
 {{#hasManyUuids}}
-<div class="footer">
-	<div class="clear button unselectable" on-click="clear">
-		<span class="icon"></span>
-		<span class="label">clear</span>
-	</div>
-</div>
+	{{>footer}}
 {{/hasManyUuids}}
 
 {{#hasUuids}}
-<div class="output">
-	<ul>
-	{{#uuidlist}}
-		<li>
-			<div class="uuid">{{.}}</div>
-		</li>
-	{{/uuidlist}}
-	</ul>
-</div>
-
-<div class="footer">
-	<div class="clear button unselectable" on-click="clear">
-		<span class="icon"></span>
-		<span class="label">clear</span>
+	<div class="output">
+		<ul>
+		{{#uuidlist}}
+			<li>
+				<div class="uuid">{{.}}</div>
+			</li>
+		{{/uuidlist}}
+		</ul>
 	</div>
-</div>
+
+	{{>footer}}
 {{/hasUuids}}
 
 {{#isWorking}}
-<div class="modal-blinder">
-	<div class="modal-wrapper">
-		<div class="spinner">
-		  <div class="rect1"></div>
-		  <div class="rect2"></div>
-		  <div class="rect3"></div>
-		  <div class="rect4"></div>
-		  <div class="rect5"></div>
-		</div>
-	</div>
-</div>
+	{{>spinner}}
 {{/isWorking}}
