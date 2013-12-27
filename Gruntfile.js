@@ -15,10 +15,27 @@ module.exports = function(grunt) {
                 src: [ 'bin' ]
             }
         },
-        cssmin: {
-            build: {
-                files: {
-                    'bin/uuid-machine.css': [ 'bin/**/*.css' ]
+        requirejs: {
+            compile: {
+                options: {
+                    appDir: 'src',
+                    baseUrl: './',
+                    dir: 'bin',
+                    optimizeCss: 'standard',
+                    skipDirOptimize: false,
+                    preserveLicenseComments: false,
+                    wrap: true,
+                    mainConfigFile: 'src/app.js',
+                    modules: [
+                        { name: 'util/uuid' },
+                        { name: 'enum/uuidformat' },
+                        { name: 'controller/machine', exclude: ['enum/uuidformat', 'util/uuid'] },
+                        { name: 'view/generator/generator', exclude: ['controller/machine', 'enum/uuidformat'] },
+                        { name: 'view/main/main', exclude: ['view/generator/generator'] },
+                    ],
+                    uglify: {
+                        max_line_length: 1000
+                    }
                 }
             }
         },
@@ -35,38 +52,18 @@ module.exports = function(grunt) {
                 files: [ 'src/**', '!src/**/*.css', '!src/**/*.js' ],
                 tasks: [ 'copy' ]
             }
-        },
-        requirejs: {
-            compile: {
-                options: {
-                    appDir: "src",
-                    baseUrl: "./",
-                    dir: "bin",
-                    skipDirOptimize: false,
-                    preserveLicenseComments: false,
-                    mainConfigFile: "src/app.js",
-                    modules: [
-                        { name: "controller/machine" },
-                        { name: "enum/uuidformat" },
-                        { name: "util/uuid" },
-                        { name: "view/generator/generator" },
-                        { name: "view/main/main" },
-                    ]
-                }
-            }
         }
     });
  
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
  
     grunt.registerTask(
         'build', 
         'Compiles all of the assets and copies the files to the build directory.', 
-        [ 'clean:build', 'copy', 'cssmin', 'requirejs:compile' ]
+        [ 'clean:build', 'copy', 'requirejs:compile' ]
     );
 
     grunt.registerTask(
