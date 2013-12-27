@@ -19,9 +19,15 @@ enum/uuidformat.js
 ----------------
 enum/uuidformat.js
 
+controller/machine.js
+----------------
+vendor/lodash.min.js
+controller/machine.js
+
 view/generator/generator.js
 ----------------
 vendor/Ractive.js
+util/uuid.js
 vendor/text.js
 text!view/generator/generator.html
 text!view/generator/footer.html
@@ -33,15 +39,9 @@ vendor/require-css/css!view/generator/generator
 vendor/require-css/css!view/spinner/spinner
 view/generator/generator.js
 
-controller/machine.js
-----------------
-vendor/lodash.min.js
-controller/machine.js
-
 view/main/main.js
 ----------------
 vendor/lodash.min.js
-util/uuid.js
 enum/uuidformat.js
 controller/machine.js
 text!view/main/main.html
