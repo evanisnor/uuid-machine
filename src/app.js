@@ -1,5 +1,5 @@
 requirejs.config({
-    baseUrl: 'app',
+    baseUrl: 'src',
     paths: {
         lodash : 'vendor/lodash.min',
         ractive: 'vendor/Ractive'
