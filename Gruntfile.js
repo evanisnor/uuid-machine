@@ -13,28 +13,12 @@ module.exports = function(grunt) {
         clean: {
             build: {
                 src: [ 'bin' ]
-            },
-            stylesheets: {
-                src: [ 'bin/**/*.css', '!bin/uuid-machine.css' ]
-            },
-            scripts: {
-                src: [ 'bin/**/*.js', '!bin/uuid-machine.js' ]
             }
         },
         cssmin: {
             build: {
                 files: {
                     'bin/uuid-machine.css': [ 'bin/**/*.css' ]
-                }
-            }
-        },
-        uglify: {
-            build: {
-                options: {
-                    mangle: false
-                },
-                files: {
-                    'bin/uuid-machine.js': [ 'bin/**/*.js' ]
                 }
             }
         },
@@ -55,7 +39,8 @@ module.exports = function(grunt) {
         requirejs: {
             compile: {
                 options: {
-                    baseUrl: "src",
+                    appDir: "src",
+                    baseUrl: "./",
                     dir: "bin",
                     skipDirOptimize: false,
                     preserveLicenseComments: false,
@@ -75,7 +60,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
  
