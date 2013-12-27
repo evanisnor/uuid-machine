@@ -15,6 +15,9 @@ module.exports = function(grunt) {
                 src: [ 'bin' ]
             }
         },
+        jshint: {
+            all: ['src/**/*.js']
+        },
         requirejs: {
             compile: {
                 options: {
@@ -50,6 +53,7 @@ module.exports = function(grunt) {
  
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
  
