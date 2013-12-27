@@ -40,7 +40,7 @@ module.exports = function(grunt) {
                 base: 'bin'
             },
             src: ['**/*']
-        }
+        },
         watch: {
             stylesheets: {
                 files: 'src/**/*.css',
