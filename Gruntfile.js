@@ -26,13 +26,6 @@ module.exports = function(grunt) {
                     preserveLicenseComments: false,
                     wrap: true,
                     mainConfigFile: 'src/app.js',
-                    modules: [
-                        { name: 'util/uuid' },
-                        { name: 'enum/uuidformat' },
-                        { name: 'controller/machine', exclude: ['enum/uuidformat', 'util/uuid'] },
-                        { name: 'view/generator/generator', exclude: ['controller/machine', 'enum/uuidformat'] },
-                        { name: 'view/main/main', exclude: ['view/generator/generator'] },
-                    ],
                     uglify: {
                         max_line_length: 1000
                     }

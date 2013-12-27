@@ -1,1 +1,1 @@
-(function(){define("enum/uuidformat",[],function(){return{Uppercase:{label:"uppercase"},Hyphens:{label:"hyphens"},Braces:{label:"braces"}}})})();
+define([],function(){return{Uppercase:{label:"uppercase"},Hyphens:{label:"hyphens"},Braces:{label:"braces"}}});
