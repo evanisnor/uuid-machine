@@ -42,18 +42,10 @@ module.exports = function(grunt) {
             src: ['**/*']
         },
         watch: {
-            stylesheets: {
-                files: 'src/**/*.css',
-                tasks: [ 'stylesheets' ]
+            build: {
+                files: [ 'src/**/*',],
+                tasks: [ 'build' ]
             },
-            scripts: {
-                files: 'src/**/*.js',
-                tasks: [ 'scripts' ]
-            },
-            copy: {
-                files: [ 'src/**', '!src/**/*.css', '!src/**/*.js' ],
-                tasks: [ 'copy' ]
-            }
         }
     });
  
@@ -67,12 +59,12 @@ module.exports = function(grunt) {
     grunt.registerTask(
         'build', 
         'Compiles all of the assets and copies the files to the build directory.', 
-        [ 'clean:build', 'copy', 'jshint:all', 'requirejs:compile' ]
+        [ 'jshint:all', 'clean:build', 'copy', 'requirejs:compile' ]
     );
 
     grunt.registerTask(
         'default', 
         'Watches the project for changes, automatically builds them and runs a server.', 
-        [ 'jshint:all', 'build', 'watch' ]
+        [ 'build', 'watch' ]
     );
 };

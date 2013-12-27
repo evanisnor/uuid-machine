@@ -22,6 +22,5 @@ define([
 		};
 
 		return view;
-
 	}
 );
