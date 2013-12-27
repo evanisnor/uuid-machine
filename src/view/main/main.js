@@ -9,7 +9,7 @@ define([
 		var view = function(element) {
 			this.element = element;
 			this.render();
-		}
+		};
 
 		view.prototype.render = function() {
 			var self = this;
@@ -19,7 +19,7 @@ define([
 			});
 
 			new GeneratorView('#view-generator');
-		}
+		};
 
 		return view;
 

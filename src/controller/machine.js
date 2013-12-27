@@ -37,30 +37,30 @@ define(['lodash', 'util/uuid', 'enum/uuidformat'],
 				this.formatting = formattingList;
 			}
 
-			if (_.contains(this.formatting, UuidFormat.Uppercase)
-				&& !_.contains(this.previousFormatting, UuidFormat.Uppercase)) {
+			if (_.contains(this.formatting, UuidFormat.Uppercase) &&
+				!_.contains(this.previousFormatting, UuidFormat.Uppercase)) {
 				this.setUppercase();
 			}
-			else if (!_.contains(this.formatting, UuidFormat.Uppercase)
-					&& _.contains(this.previousFormatting, UuidFormat.Uppercase)) {
+			else if (!_.contains(this.formatting, UuidFormat.Uppercase) &&
+				_.contains(this.previousFormatting, UuidFormat.Uppercase)) {
 				this.unsetUppercase();
 			}
 
-			if (_.contains(this.formatting, UuidFormat.Hyphens)
-				&& !_.contains(this.previousFormatting, UuidFormat.Hyphens)) {
+			if (_.contains(this.formatting, UuidFormat.Hyphens) &&
+				!_.contains(this.previousFormatting, UuidFormat.Hyphens)) {
 				this.setHypens();
 			}
-			else if (!_.contains(this.formatting, UuidFormat.Hyphens)
-					&& _.contains(this.previousFormatting, UuidFormat.Hyphens)) {
+			else if (!_.contains(this.formatting, UuidFormat.Hyphens) &&
+				_.contains(this.previousFormatting, UuidFormat.Hyphens)) {
 				this.unsetHypens();
 			}
 
-			if (_.contains(this.formatting, UuidFormat.Braces)
-				&& !_.contains(this.previousFormatting, UuidFormat.Braces)) {
+			if (_.contains(this.formatting, UuidFormat.Braces) &&
+				!_.contains(this.previousFormatting, UuidFormat.Braces)) {
 				this.setBraces();
 			}
-			else if (!_.contains(this.formatting, UuidFormat.Braces)
-					&& _.contains(this.previousFormatting, UuidFormat.Braces)) {
+			else if (!_.contains(this.formatting, UuidFormat.Braces) &&
+				_.contains(this.previousFormatting, UuidFormat.Braces)) {
 				this.unsetBraces();
 			}
 

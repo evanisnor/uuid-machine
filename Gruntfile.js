@@ -16,7 +16,7 @@ module.exports = function(grunt) {
             }
         },
         jshint: {
-            all: ['src/**/*.js']
+            all: ['src/**/*.js', '!src/vendor/**/*.js']
         },
         requirejs: {
             compile: {
@@ -24,10 +24,10 @@ module.exports = function(grunt) {
                     appDir: 'src',
                     baseUrl: './',
                     dir: 'bin',
+                    wrap: true,
                     optimizeCss: 'standard',
                     skipDirOptimize: false,
                     preserveLicenseComments: false,
-                    wrap: true,
                     mainConfigFile: 'src/app.js',
                     uglify: {
                         max_line_length: 1000
@@ -35,6 +35,12 @@ module.exports = function(grunt) {
                 }
             }
         },
+        'gh-pages': {
+            options: {
+                base: 'bin'
+            },
+            src: ['**/*']
+        }
         watch: {
             stylesheets: {
                 files: 'src/**/*.css',
@@ -56,16 +62,17 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
+    grunt.loadNpmTasks('grunt-gh-pages');
  
     grunt.registerTask(
         'build', 
         'Compiles all of the assets and copies the files to the build directory.', 
-        [ 'clean:build', 'copy', 'requirejs:compile' ]
+        [ 'clean:build', 'copy', 'jshint:all', 'requirejs:compile' ]
     );
 
     grunt.registerTask(
         'default', 
         'Watches the project for changes, automatically builds them and runs a server.', 
-        [ 'build', 'watch' ]
+        [ 'jshint:all', 'build', 'watch' ]
     );
 };
