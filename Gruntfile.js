@@ -1,11 +1,10 @@
 module.exports = function(grunt) {
  
-    // configure the tasks
     grunt.initConfig({
  
         copy: {
             build: {
-                cwd: 'app',
+                cwd: 'src',
                 src: [ '**' ],
                 dest: 'bin',
                 expand: true
@@ -41,26 +40,26 @@ module.exports = function(grunt) {
         },
         watch: {
             stylesheets: {
-                files: 'app/**/*.css',
+                files: 'src/**/*.css',
                 tasks: [ 'stylesheets' ]
             },
             scripts: {
-                files: 'app/**/*.js',
+                files: 'src/**/*.js',
                 tasks: [ 'scripts' ]
             },
             copy: {
-                files: [ 'app/**', '!app/**/*.css', '!app/**/*.js' ],
+                files: [ 'src/**', '!src/**/*.css', '!src/**/*.js' ],
                 tasks: [ 'copy' ]
             }
         },
         requirejs: {
             compile: {
                 options: {
-                    baseUrl: "app",
+                    baseUrl: "src",
                     dir: "bin",
                     skipDirOptimize: false,
                     preserveLicenseComments: false,
-                    mainConfigFile: "app/app.js",
+                    mainConfigFile: "src/app.js",
                     modules: [
                         { name: "controller/machine" },
                         { name: "enum/uuidformat" },
@@ -73,7 +72,6 @@ module.exports = function(grunt) {
         }
     });
  
-    // load the tasks
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
@@ -81,7 +79,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
  
-    // define the tasks
     grunt.registerTask(
         'build', 
         'Compiles all of the assets and copies the files to the build directory.', 
