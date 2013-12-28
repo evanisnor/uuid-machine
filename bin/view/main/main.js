@@ -1,1 +1,0 @@
-define(["ractive","view/generator/generator","text!view/main/main.html","css!view/main/main.css"],function(e,t,n){var r=function(e){this.element=e,this.render()};return r.prototype.render=function(){var r=this;r.ractive=new e({el:r.element,template:n}),new t("#view-generator")},r});

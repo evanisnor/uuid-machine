@@ -1,0 +1,33 @@
+{
+    "name": "uuid-machine",
+    "version": "1.0.0",
+    "homepage": "https://github.com/leadhead9/uuid-machine",
+    "authors": [
+        "leadhead9"
+    ],
+    "description": "A simple web-based UUIDv4 generator.",
+    "main": "index.html",
+    "keywords": [
+        "uuid",
+        "generator",
+        "web",
+        "only"
+    ],
+    "license": "GPLv2",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "private": true,
+    "dependencies": {
+        "lodash": "~2.4.1",
+        "ractive": "~0.3.9",
+        "require-css": "~0.1.1",
+        "requirejs-domready": "~2.0.1",
+        "requirejs-text": "~2.0.10",
+        "requirejs": "~2.1.9"
+    }
+}

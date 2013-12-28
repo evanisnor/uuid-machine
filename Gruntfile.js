@@ -5,7 +5,7 @@ module.exports = function(grunt) {
         copy: {
             build: {
                 cwd: 'src',
-                src: [ '**' ],
+                src: [ 'index.html', 'app.js', 'bower.json', 'controller/**', 'enum/**', 'util/**', 'view/**' ],
                 dest: 'bin',
                 expand: true
             },
@@ -16,13 +16,13 @@ module.exports = function(grunt) {
             }
         },
         jshint: {
-            all: ['src/**/*.js', '!src/vendor/**/*.js']
+            all: ['src/**/*.js', '!src/bower_components/**/*.js']
         },
         requirejs: {
             compile: {
                 options: {
-                    appDir: 'src',
-                    baseUrl: './',
+                    baseUrl: './src',
+                    fileExclusionRegExp: /bower_components/,
                     dir: 'bin',
                     wrap: true,
                     optimizeCss: 'standard',
@@ -41,6 +41,17 @@ module.exports = function(grunt) {
             },
             src: ['**/*']
         },
+        shell: {
+            'bower-install': {
+                options: {
+                    execOptions: {
+                        cwd: 'bin'
+                    },
+                    stdout: true
+                },
+                command: 'bower install'
+            }
+        },
         watch: {
             build: {
                 files: [ 'src/**/*',],
@@ -55,11 +66,18 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-gh-pages');
+    grunt.loadNpmTasks('grunt-shell');
  
     grunt.registerTask(
         'build', 
         'Compiles all of the assets and copies the files to the build directory.', 
-        [ 'jshint:all', 'clean:build', 'copy', 'requirejs:compile' ]
+        [ 'jshint:all', 'clean:build', 'copy', 'requirejs:compile', 'shell:bower-install' ]
+    );
+
+    grunt.registerTask(
+        'publish',
+        'Compiles all assets and copies the result to the gh-pages branch.',
+        [ 'build', 'gh-pages' ]
     );
 
     grunt.registerTask(

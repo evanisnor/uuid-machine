@@ -1,29 +1,29 @@
 requirejs.config({
     baseUrl: '.',
     paths: {
-        lodash : 'vendor/lodash.min',
-        ractive: 'vendor/Ractive'
+        lodash : 'bower_components/lodash/dist/lodash.min',
+        ractive: 'bower_components/ractive/Ractive'
     },
     packages: [
         {
             name: 'domReady',
-            location: 'vendor',
+            location: 'bower_components/requirejs-domready',
             main: 'domReady'
         },
         {
             name: 'text',
-            location: 'vendor',
+            location: 'bower_components/requirejs-text',
             main: 'text'
         },
         {
             name: 'css',
-            location: 'vendor/require-css',
+            location: 'bower_components/require-css',
             main: 'css'
         }
     ],
     map: {
         '*': {
-            'css': 'vendor/require-css/css'
+            'css': 'bower_components/require-css/css'
         }
     }
 });
