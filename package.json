@@ -19,8 +19,7 @@
     "uuid generator",
     "web only"
   ],
-  "dependencies": {
-  },
+  "dependencies": {},
   "engine": "node >= 0.10",
   "license": "GPLv2",
   "devDependencies": {

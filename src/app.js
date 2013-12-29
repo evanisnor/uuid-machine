@@ -2,7 +2,7 @@ requirejs.config({
     baseUrl: '.',
     paths: {
         lodash : 'bower_components/lodash/dist/lodash.min',
-        ractive: 'bower_components/ractive/Ractive'
+        ractive: 'bower_components/ractive/build/Ractive.min'
     },
     packages: [
         {
